@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "sourceMap": true,
+  },
+  "lib": ["ESNext"],
+  "include": ["./src/**/*.ts", "rollup.config.ts"]
+}
