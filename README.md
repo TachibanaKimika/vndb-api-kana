@@ -70,4 +70,4 @@ const characterFilters: CharacterFilters = [
 
 ## Images
 
-[](https://raw.githubusercontent.com/TachibanaKimika/vndb-api-kana/master/image/01.png)
+![](https://raw.githubusercontent.com/TachibanaKimika/vndb-api-kana/master/image/01.png)
