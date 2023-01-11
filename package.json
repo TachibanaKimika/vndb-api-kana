@@ -1,11 +1,16 @@
 {
   "name": "vndb-api-kana",
-  "version": "1.0.0",
+  "version": "0.1.2",
   "license": "MIT",
-  "main": "dist/index.esm.js",
-  "module": "dist/index.esm.js",
-  "unpkg": "dist/index.umd.js",
-  "jsdelivr": "dist/index.umd.js",
+  "author": "TachibanaKimika",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs.js",
+      "require": "./dist/index.cjs.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "description": "common toolkit",
   "files": [
     "dist"
   ],
@@ -17,7 +22,12 @@
   "keywords": [
     "vndb"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TachibanaKimika/vndb-api-kana"
+  },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "13.3.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "axios": "^1.2.2",

@@ -1,6 +1,7 @@
 import dts from 'rollup-plugin-dts';
 import typescript from 'rollup-plugin-typescript2';
 import sourceMaps from 'rollup-plugin-sourcemaps';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 
 export default [
@@ -22,8 +23,8 @@ export default [
         sourcemap: true,
       },
       {
-        format: 'es',
-        file: 'dist/index.esm.js',
+        format: 'esm',
+        file: 'dist/index.mjs.js',
         sourcemap: true,
       },
     ],

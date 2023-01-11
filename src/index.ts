@@ -12,7 +12,7 @@ const defaultConfig: CreateAxiosDefaults = {
 export default class VNDBAPI {
   public apis: {
     [K in keyof typeof apis]: ReturnType<(typeof apis)[K]>;
-  };
+  } = {} as any;
 
   private auth: string;
 
@@ -29,6 +29,7 @@ export default class VNDBAPI {
 
   private createApis() {
     Object.entries(apis).forEach(([key, value]) => {
+      console.log('k', 'v', key, value);
       this.apis[key] = value(this.config);
     });
   }
@@ -43,3 +44,5 @@ export default class VNDBAPI {
     this.createApis();
   }
 }
+
+export { VNDBAPI };
