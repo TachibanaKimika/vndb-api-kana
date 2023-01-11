@@ -1,9 +1,9 @@
-import { CharacterFilters } from './Character';
+import { Character, CharacterFilters } from './Character';
 import { Filters } from './Filters';
-import { ProducerFilters } from './Producer';
-import { ReleaseFilters } from './release';
-import { TagFilters, TraitFilters } from './Tag';
-import { VnFilters } from './Vn';
+import { Producer, ProducerFilters } from './Producer';
+import { Release, ReleaseFilters } from './release';
+import { Tag, TagFilters, Trait, TraitFilters } from './Tag';
+import { Vn, VnFilters } from './Vn';
 
 export interface BaseQuery {
   /**
@@ -105,32 +105,52 @@ export interface BaseResponse<T> {
   normalized_filters: string[];
 }
 
+type NestedPath<T extends 'array' | 'object', P, C = undefined> = `${P &
+  string}${C extends string ? (C extends 'undefined' ? '' : `.${C}`) : ''}`;
+
+type DeepNested<V, K = ''> = V extends object[]
+  ? NestedPath<'array', K, DeepPath<V[number]> | undefined>
+  : V extends unknown[]
+  ? NestedPath<'array', K>
+  : V extends object
+  ? NestedPath<'object', K, DeepPath<V>>
+  : never;
+
+type DeepPath<T extends object> = {
+  [Q in keyof T]-?: Q | DeepNested<NonNullable<T[Q]>, Q>;
+}[keyof T];
 export interface VnRequest extends BaseQuery {
   filters: VnFilters;
-  fields: string[];
+  fields: DeepPath<Vn>[];
+  sort?: 'id' | 'title' | 'released' | 'popularity' | 'rating' | 'votecount';
 }
 
 export interface ReleaseRequest extends BaseQuery {
   filters: ReleaseFilters;
-  sort: 'id' | 'title' | 'released';
+  fields: DeepPath<Release>[];
+  sort?: 'id' | 'title' | 'released';
 }
 
 export interface CharacterRequest extends BaseQuery {
   filters: CharacterFilters;
-  sort: 'id' | 'name';
+  fields: DeepPath<Character>[];
+  sort?: 'id' | 'name';
 }
 
 export interface ProducerRequest extends BaseQuery {
   filters: ProducerFilters;
-  sort: 'id' | 'name';
+  fields: DeepPath<Producer>[];
+  sort?: 'id' | 'name';
 }
 
 export interface TagRequest extends BaseQuery {
   filters: TagFilters;
-  sort: 'id' | 'name' | 'vn_count';
+  fields: DeepPath<Tag>[];
+  sort?: 'id' | 'name' | 'vn_count';
 }
 
 export interface TraitRequest extends BaseQuery {
   filters: TraitFilters;
-  sort: 'id' | 'name' | 'char_count';
+  fields: DeepPath<Trait>[];
+  sort?: 'id' | 'name' | 'char_count';
 }

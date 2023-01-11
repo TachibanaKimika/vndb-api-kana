@@ -1,6 +1,12 @@
 import { CreateAxiosDefaults } from 'axios';
 import createApi, { ApiPath } from './apis/createApis';
 import apis from './apis';
+export * from './interface/Api';
+export * from './interface/Character';
+export * from './interface/Vn';
+export * from './interface/Release';
+export * from './interface/Producer';
+export * from './interface/Tag';
 
 const defaultConfig: CreateAxiosDefaults = {
   baseURL: 'https://api.vndb.org/kana',
@@ -29,7 +35,6 @@ export default class VNDBAPI {
 
   private createApis() {
     Object.entries(apis).forEach(([key, value]) => {
-      console.log('k', 'v', key, value);
       this.apis[key] = value(this.config);
     });
   }
@@ -44,5 +49,5 @@ export default class VNDBAPI {
     this.createApis();
   }
 }
-
-export { VNDBAPI };
+const api = new VNDBAPI().apis;
+export { VNDBAPI, api };
