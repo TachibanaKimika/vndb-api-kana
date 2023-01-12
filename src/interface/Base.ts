@@ -1,3 +1,5 @@
+import { Release } from './release';
+
 export interface Image {
   /**
    * String, image identifier.
@@ -28,14 +30,12 @@ export interface Image {
 export interface ScreenShot extends Image {
   thumbnail: string;
   thumbnail_dims: [number, number];
-  release: {
-    /**
-     * only support id
-     *
-     * Release object. All release fields can be selected. It is very common for all screenshots of a VN to be assigned to the same release, so the fields you select here are likely to get duplicated several times in the response. If you want to fetch more than just a few fields, it is more efficient to only select release.id here and then grab detailed release info with a separate request.
-     */
-    id: number;
-  };
+  /**
+   *Release object. All release fields can be selected. It is very common for all screenshots of a VN to be assigned to the same release, so the fields you select here are likely to get duplicated several times in the response. If you want to fetch more than just a few fields, it is more efficient to only select release.id here and then grab detailed release info with a separate request.
+   *
+   * https://api.vndb.org/kana#release-fields
+   */
+  release: Omit<Release, 'vns'>;
 }
 /**
  * titles associated with the VN
@@ -61,12 +61,6 @@ export interface Title {
    * Boolean, whether this is the “main” title for the visual novel entry. Exactly one title has this flag set in the titles array and it’s always the title whose lang matches the VN’s olang field. This field is included for convenience, you can of course also use the olang field to grab the main title.
    */
   main: boolean;
-}
-
-export interface VnTag {
-  rating: number;
-  spoiler: number;
-  lie: boolean;
 }
 
 export interface Languages {

@@ -1,5 +1,6 @@
 import { Image } from './Base';
 import { Filters } from './Filters';
+import { Release } from './release';
 import { Trait } from './Tag';
 import { Vn, VnFilters } from './Vn';
 
@@ -7,18 +8,23 @@ export interface VnInCharacter extends Vn {
   /**
    * Integer, 0, 1 or 2, spoiler level.
    */
-  spoiler: number;
+  spoiler: 0 | 1 | 2;
   /**
    * String, "main" for protagonist, "primary" for main characters, "side" or "appears".
    */
   role: 'main' | 'primary' | 'side' | 'appears';
+  /**
+   * Object, usually null, specific release that this character appears in.
+   *
+   */
+  release: Release;
 }
 
 export interface TraitInCharacter extends Trait {
   /**
    * Integer, 0, 1 or 2, spoiler level.
    */
-  spoiler: number;
+  spoiler: 0 | 1 | 2;
 
   lie: boolean;
 }
@@ -39,13 +45,19 @@ export interface Character {
    */
   aliases: string[];
   /**
-   * String, possibly null, "a", "b", "ab" or "o".
+   * String, possibly null, may contain formatting codes.
+   *
+   * formatting codes: https://vndb.org/d9#4
    */
-  blood_type: 'a' | 'b' | 'ab' | 'o' | null;
+  description: string;
   /**
    * Object, possibly null, same sub-fields as the image visual novel field.
    */
   image: Image;
+  /**
+   * String, possibly null, "a", "b", "ab" or "o".
+   */
+  blood_type: 'a' | 'b' | 'ab' | 'o' | null;
   /**
    * Integer, possibly null, cm.
    */
@@ -82,6 +94,10 @@ export interface Character {
    * Possibly null, otherwise an array of two strings: the character’s apparent (non-spoiler) sex and the character’s real (spoiler) sex. Possible values are null, "m", "f" or "b" (meaning “both”).
    */
   sex: 'f' | 'm' | 'b' | null | [string, string];
+  /**
+   * Array of objects, visual novels this character appears in. The same visual novel may be listed multiple times with a different release; the spoiler level and role can be different per release.
+   */
+  vns: VnInCharacter[];
   /**
    * Array of objects, possibly empty.
    */

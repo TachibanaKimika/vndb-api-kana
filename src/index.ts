@@ -34,7 +34,7 @@ export default class VNDBAPI {
   }
 
   private createApis() {
-    Object.entries(apis).forEach(([key, value]) => {
+    Object.entries(apis).forEach(([key, value]: [string, any]) => {
       this.apis[key] = value(this.config);
     });
   }

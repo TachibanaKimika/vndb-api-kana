@@ -43,9 +43,11 @@ kana.apis
 
 ```
 
+You can also use the API directly by importing the `api` object and types from the package.
+
 
 ```typescript
-import { api, CharacterFilters } from 'vndb-api-kana';
+import { api, CharacterFilters, Character } from 'vndb-api-kana';
 
 const characterFilters: CharacterFilters = [
   'and',
@@ -65,6 +67,11 @@ const characterFilters: CharacterFilters = [
     // do something
   }
 })();
+
+// others function:
+const renderChar = (c: Character) => {
+  // ...
+};
 
 ```
 
