@@ -56,7 +56,7 @@ export interface Title {
   /**
    * Boolean.
    */
-  offical: boolean;
+  official: boolean;
   /**
    * Boolean, whether this is the “main” title for the visual novel entry. Exactly one title has this flag set in the titles array and it’s always the title whose lang matches the VN’s olang field. This field is included for convenience, you can of course also use the olang field to grab the main title.
    */

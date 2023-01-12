@@ -26,12 +26,22 @@ const hasFields = <T>(obj: T): obj is T & { fields: string[] | string } =>
 export default function createApi<T, S>(
   apiPath: ApiPath,
   config?: CreateAxiosDefaults,
+  // your own request function
+  useOwn?: <T, S>(
+    params: T,
+    path: ApiPath,
+    /** default has BaseURL header */
+    config?: CreateAxiosDefaults,
+  ) => Promise<S>,
 ) {
   const axiosInstance = request(config);
   return async (params: T = {} as T): Promise<S> => {
     const { method, path } = apiPath;
     if (hasFields(params)) {
       params.fields = fieldFmt(params.fields as string[]);
+    }
+    if (useOwn) {
+      return useOwn(params, apiPath, config);
     }
     switch (method) {
       case 'GET': {

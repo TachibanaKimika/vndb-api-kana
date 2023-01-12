@@ -4,6 +4,8 @@ import { Producer, ProducerFilters } from './Producer';
 import { Release, ReleaseFilters } from './release';
 import { Tag, TagFilters, Trait, TraitFilters } from './Tag';
 import { Vn, VnFilters } from './Vn';
+import { ApiPath } from 'src/apis/createApis';
+import { CreateAxiosDefaults } from 'axios';
 
 export interface BaseQuery {
   /**
@@ -119,38 +121,53 @@ type DeepNested<V, K = ''> = V extends object[]
 type DeepPath<T extends object> = {
   [Q in keyof T]-?: Q | DeepNested<NonNullable<T[Q]>, Q>;
 }[keyof T];
+
+export type VnField = DeepPath<Vn>;
+export type ReleaseField = DeepPath<Release>;
+export type CharacterField = DeepPath<Character>;
+export type ProducerField = DeepPath<Producer>;
+export type TagField = DeepPath<Tag>;
+export type TraitField = DeepPath<Trait>;
+
 export interface VnRequest extends BaseQuery {
   filters: VnFilters;
-  fields: DeepPath<Vn>[];
+  fields: VnField[];
   sort?: 'id' | 'title' | 'released' | 'popularity' | 'rating' | 'votecount';
 }
 
 export interface ReleaseRequest extends BaseQuery {
   filters: ReleaseFilters;
-  fields: DeepPath<Release>[];
+  fields: ReleaseField[];
   sort?: 'id' | 'title' | 'released';
 }
 
 export interface CharacterRequest extends BaseQuery {
   filters: CharacterFilters;
-  fields: DeepPath<Character>[];
+  fields: CharacterField[];
   sort?: 'id' | 'name';
 }
 
 export interface ProducerRequest extends BaseQuery {
   filters: ProducerFilters;
-  fields: DeepPath<Producer>[];
+  fields: ProducerField[];
   sort?: 'id' | 'name';
 }
 
 export interface TagRequest extends BaseQuery {
   filters: TagFilters;
-  fields: DeepPath<Tag>[];
+  fields: TagField[];
   sort?: 'id' | 'name' | 'vn_count';
 }
 
 export interface TraitRequest extends BaseQuery {
   filters: TraitFilters;
-  fields: DeepPath<Trait>[];
+  fields: TraitField[];
   sort?: 'id' | 'name' | 'char_count';
 }
+
+export type UseRequest = <T, S>(
+  params: T,
+  path: ApiPath,
+  /** default has BaseURL header */
+  config?: CreateAxiosDefaults,
+) => Promise<S>;

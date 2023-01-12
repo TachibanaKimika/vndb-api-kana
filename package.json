@@ -1,6 +1,6 @@
 {
   "name": "vndb-api-kana",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "license": "MIT",
   "author": "TachibanaKimika",
   "exports": {
@@ -10,7 +10,7 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "common toolkit",
+  "description": "api wrapper for vndb.org",
   "files": [
     "dist"
   ],
@@ -20,7 +20,7 @@
     "build": "rollup --config"
   },
   "keywords": [
-    "vndb"
+    "vndb", "erogame", "visual novel"
   ],
   "repository": {
     "type": "git",

@@ -1,5 +1,6 @@
 import { CreateAxiosDefaults } from 'axios';
 import createApi, { ApiPath } from './apis/createApis';
+import { UseRequest } from './interface/Api';
 import apis from './apis';
 export * from './interface/Api';
 export * from './interface/Character';
@@ -33,9 +34,9 @@ export default class VNDBAPI {
     this.createApis();
   }
 
-  private createApis() {
+  private createApis(use?: any) {
     Object.entries(apis).forEach(([key, value]: [string, any]) => {
-      this.apis[key] = value(this.config);
+      this.apis[key] = value(this.config, use);
     });
   }
 
@@ -47,6 +48,14 @@ export default class VNDBAPI {
     this.auth = auth;
     this.config.headers['Authorization'] = `TOKEN ${this.auth}`;
     this.createApis();
+  }
+
+  /**
+   *
+   * @ignore TODO
+   */
+  public use(use: UseRequest) {
+    this.createApis(use);
   }
 }
 const api = new VNDBAPI().apis;
