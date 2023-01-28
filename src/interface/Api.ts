@@ -4,7 +4,7 @@ import { Producer, ProducerFilters } from './Producer';
 import { Release, ReleaseFilters } from './release';
 import { Tag, TagFilters, Trait, TraitFilters } from './Tag';
 import { Vn, VnFilters } from './Vn';
-import { ApiPath } from 'src/apis/createApis';
+import { ApiPath } from '../apis/createApis';
 import { CreateAxiosDefaults } from 'axios';
 
 export interface BaseQuery {

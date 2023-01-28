@@ -1,6 +1,6 @@
 # vndb-api-Kana
 
-An API wrapper for V[VNDB HTTP API(v2)](https://api.vndb.org/kana) that allows you to interact with the VNDB API in a type-safe manner using TypeScript.
+An API wrapper for [VNDB HTTP API(v2)](https://api.vndb.org/kana) that allows you to interact with the VNDB API in a type-safe manner using TypeScript.
 
 ## Features
 - Strong type checking for all the parameters passed in when making requests to the VNDB API, which ensures that your code is correct and reduces the chances of runtime errors.
@@ -11,7 +11,7 @@ An API wrapper for V[VNDB HTTP API(v2)](https://api.vndb.org/kana) that allows y
 To install this package, simply run the following command:
 
 ```bash
-npm install vndb-api-kana
+npm install vndb-api-kana axios
 ```
 ## Usage
 
