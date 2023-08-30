@@ -53,7 +53,7 @@ export interface Vn {
   /**
    * Array of objects, possibly empty.
    */
-  screenshot: ScreenShot[];
+  screenshots: ScreenShot[];
   /**
    * Integer, possibly null, rough length estimate of the VN between 1 (very short) and 5 (very long). This field is only used as a fallback for when there are no length votes, so you’ll probably want to fetch length_minutes too.
    */
